@@ -108,7 +108,7 @@ const signup=async(req,res)=>{ // use async to connect with db
         console.log(error);
     }
 }
-//post for login/signin
+//post for login/signin 
 const adminPost = async (req, res) => {
     try {
         const check = await adminCollection.findOne({ email: req.body.email });
@@ -131,7 +131,7 @@ const adminFront=(req,res)=>{
         console.log(error)
     }
 }
-// search for data
+// search for data here
 
 
 module.exports={
