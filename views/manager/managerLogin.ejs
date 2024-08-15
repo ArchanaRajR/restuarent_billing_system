@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Login</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap");
+        :root {
+          --c-primary: #b2b377;
+          --p-8-16: 8px 16px;
+          --m-8-0: 8px 0;
+        }
+        html {
+          font-size: 63.5%;
+          font-family: "Mitr", sans-serif;
+        }
+        body {
+          width: 100vw;
+          height: 100vh;
+          background-image: url("https://i.postimg.cc/T2Jp792R/fresh-gourmet-meal-beef-taco-salad-plate-generated-by-ai.jpg");
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          overflow: hidden;
+        }
+        .login-container {
+          padding: 40px 20px;
+          text-align: center;
+        }
+        .login-content {
+          backdrop-filter: blur(6px);
+          border: 2px solid #d2d18080;
+          -webkit-box-shadow: -1px -1px 30px -8px rgba(0, 0, 0, 0.9);
+          -moz-box-shadow: -1px -1px 30px -8px rgba(0, 0, 0, 0.9);
+          box-shadow: -1px -1px 30px -8px rgba(0, 0, 0, 0.9);
+          padding: 20px;
+          border-radius: 1.6rem;
+          color: white;
+        }
+        .logo {
+          font-size: 2rem;
+        }
+        h2 {
+          font-size: 3rem;
+          line-height: 2.8;
+        }
+        .login-form {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin-bottom: 1.2rem;
+          max-width: 260px;
+          margin: 0 auto;
+        }
+        .login-form input {
+          width: 100%;
+          background-color: #ffffff40;
+          color: #fff;
+          padding: var(--p-8-16);
+          border-radius: 8px;
+        }
+        input {
+          font-size: 1.2rem;
+          border: none;
+          margin: var(--m-8-0);
+        }
+        input::placeholder {
+          color: #fff;
+        }
+        input[type="submit"] {
+          border: none;
+          background-color: var(--c-primary);
+          color: #163020;
+          font-weight: 600;
+        }
+        .login-netoworks,
+        .login-or {
+          margin: 16px 0;
+        }
+        hr {
+          width: 70%;
+          border-color: #ffffff40;
+        }
+        .login-icons {
+          text-align: left;
+          margin: 0 auto;
+          margin-bottom: 2.5rem;
+          max-width: 260px;
+        }
+        .login-icons li {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          border: 1px solid #ffffff40;
+          padding: var(--p-8-16);
+          margin: var(--m-8-0);
+          border-radius: 4px;
+          font-size: 1.4rem;
+          font-weight: 200;
+        }
+        .login-icons li > [type="logo"] {
+          margin-right: 8px;
+        }
+        .login-footer {
+          position: absolute;
+          color: var(--c-primary);
+          bottom: 20px;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        @media screen and (min-width: 400px) {
+          .login-content_header span.logo {
+            display: none;
+          }
+          .login-container {
+            padding: 0px;
+            height: 100vh;
+          }
+          .login-content {
+            position: absolute;
+            right: 0px;
+            width: 500px;
+            height: 100%;
+            max-height: 100%;
+            border: 0;
+            border-left: 2px solid #d2d18080;
+            border-radius: 0;
+            max-width: 50%;
+          }
+          .login-content {
+            animation: fRight 1s ease-in-out;
+          }
+          @keyframes fRight {
+            from {
+              opacity: 0;
+              transform: translateX(300px);
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          .login-footer {
+            left: 20px;
+            transform: none;
+          }
+        }
+        .navbar a {
+          text-decoration: none;
+          margin-right: 10px;
+        }
+        .navbar button {
+          background-color: var(--c-primary);
+          color: #163020;
+          border: none;
+          padding: var(--p-8-16);
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          font-size: 1.2rem;
+        }
+        .navbar button:hover {
+          background-color: #a1a96d;
+        }
+    </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/"><button>Back</button></a>
+    
+</nav>
+    <div class="login-container">
+        <div class="login-content">
+            <div class="login-content_header">
+                <span class="logo">
+                    <box-icon type='solid' name='landscape' color="#87A922"></box-icon> Land Scape
+                </span>
+                <h2>Welcome Admin</h2>
+            </div>
+            <form action="/manager" method="post" class="login-form">
+                <img src="https://images.freeimages.com/fic/images/icons/2526/bloggers/256/admin.png" class="gif" alt="" />
+                <input type="email" name="email" placeholder="Email" required />
+                <input type="password" name="password" placeholder="Password" required />
+                <input type="submit" id="log" value="Login" />
+            </form>
+        </div>
+        <div class="login-footer">
+          <h1>FooDie</h1>
+            <p>Terms of use | Privacy policy</p>
+        </div>
+    </div>
+</body>
+</html>

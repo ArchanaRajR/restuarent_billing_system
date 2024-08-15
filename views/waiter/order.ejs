@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Management Dashboard</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body{
+        background: black;
+        color: #f2be6f;
+    }
+    .table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 2px;
+    color: white;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+    color: #f2be6f;
+}
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    background-color: #f2be6f;
+    color: black;
+}
+    .list-group-item {
+      background: rgba(255, 255, 255, 0.1); /* Adjust transparency as needed */
+      border: none;
+      color: #f2be6f;
+    }
+    .list-group-item+.list-group-item {
+      margin-top: 15px; /* Adjust spacing between items */
+    }
+    .h2, h2 {
+    font-size: 2rem;
+    padding: 10px 0px 40px;
+    background-color: #141414;
+    border-radius: 10px;
+}
+    .sidebar {
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        background-color: rgb(26, 24, 24);
+        color: #fff;
+        padding-top: 20px;
+        transition: width 0.3s;
+    }
+
+    .h4, h4 {
+    color:  #e1ab31;
+    font-size: 1.5rem;
+    padding: 30px 0px 20px;
+}
+    .sidebar h2 {
+        font-size: 1.5rem;
+        color: #f2be6f;
+    }
+    .sidebar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+    display: block;
+    transition: background-color 0.3s;
+}
+    .sidebar a:hover {
+        background-color: #f2be6f;
+        color: black;
+        
+    }
+    .sidebar.collapsed {
+        width: 80px;
+    }
+    .sidebar.collapsed .sidebar-text {
+        display: none;
+    }
+    .sidebar.collapsed a {
+        text-align: center;
+    }
+    .content {
+        margin-left: 250px;
+        padding: 20px;
+        transition: margin-left 0.3s;
+    }
+    .content.collapsed {
+        margin-left: 80px;
+    }
+    .toggle-btn {
+        position: fixed;
+        top: 10px;
+        left: 260px;
+        background-color: #343a40;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        transition: left 0.3s;
+    }
+    .toggle-btn.collapsed {
+        left: 90px;
+    }
+    .btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    background-color: #f2be6f;
+    color: black;
+    padding: 7px 10px 7px 10px;
+    border: 2px solid #1fba20;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 2px;
+    color: #e1ab31;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #ad9731;
+    color: #e4ddd3;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #30bf30;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    background: transparent;
+    color: white;
+}
+select {
+    word-wrap: normal;
+}
+button, select {
+    text-transform: none;
+    color: white;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 20px;}
+    h2 {
+    font-size: 24px;
+    margin: 19.92px 0px;
+}
+
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 80px;
+        }
+        .sidebar .sidebar-text {
+            display: none;
+        }
+        .content {
+            margin-left: 80px;
+        }
+        .toggle-btn {
+            left: 90px;
+        }
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+</style>
+</head>
+<body>
+  <div class="sidebar">
+    <h3 style="color: #f2be6f; padding: 2px 10px 20px;">Waiter Dashboard</h3>
+    <a href="/waiter/menu" class="sidebar-text"> Menu</a>
+    <a href="/waiter/dash" class="sidebar-text"> Tables</a>
+    <a href="/waiter/dash" class="sidebar-text"> Back</a>
+  </div>
+  <!-- <button class="toggle-btn" onclick="toggleSidebar()" style="color: #495057; border: solid 1px orange; border-radius: 50%;"><i class="fas fa-bars"></i></button> -->
+  <div class="content">
+    <div class="container">
+      <h2>Create New Order</h2>
+      <form action="/orders" method="POST">
+        <div class="form-group">
+          <!-- <h3>Select Table</h3> -->
+          <select name="tableId" id="tableId" class="form-control">
+            <option value="select table">Select Table</option>
+            <% table.forEach((table) => { %>
+              <option value="<%= table.tableNumber %>"><%= table.tableNumber %></option>
+            <% }) %>
+          </select>
+        </div>
+
+      
+        <div id="orderedItems">
+  
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="addOrderedItem()">Add Items</button><br><br>
+        <button type="submit" class="btn btn-primary">Submit Order</button>
+      </form>
+
+      <h4>Existing Orders</h4>
+      <div class="list-group">
+        <% orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)); %>
+        <% orders.forEach(order => { %>
+          <div class="list-group-item">
+            <p>Order ID: <%= order._id %></p>
+            <p>Table No: <%= order.tableId.tableNumber %></p>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Dish Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                 
+                  <th>Payment Method</th>
+                  <th>Order Date</th>
+                  <th>Total Amount</th>
+                  <!-- <th>Is Reviewed</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <% order.orderedItems.forEach(item => { %>
+                  <tr>
+                    <td><%= item.dishName %></td>
+                    <td><%= item.quantity %></td>
+                    <td><%= item.price %></td>
+                    <td><%= item.status %></td>
+                  
+                    <td><%= item.paymentMethod %></td>
+                    <td><%= item.orderDate.toDateString() %></td>
+                    <td><%= item.totalAmount %></td>
+                    <!-- <td><%= item.isReviewed %></td> -->
+                  </tr>
+                <% }) %>
+                <tr>
+                  <td colspan="7"><strong>Grand Total</strong></td>
+                  <td colspan="2"><strong><%= order.grandTotal %></strong></td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <form action="/orders/<%= order._id %>/updateStatus" method="POST">
+              <div class="form-group">
+                <label for="status">Update Status:</label>
+                <select class="form-control" id="status" name="status">
+                  <option value="Preparing">Preparing</option>
+                  <option value="Packing">Packing</option>
+                  <option value="Ready to serve">Ready to serve</option>
+                  <option value="Served">Served</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+            <form action="/orders/<%= order._id %>/updatePaymentStatus" method="POST">
+              <div class="form-group">
+                <label for="paymentStatus">Update Payment Status:</label>
+                <select class="form-control" id="paymentStatus" name="paymentStatus">
+                  <option value="Pending">Pending</option>
+                  <option value="Processing">Processing</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Failure">Failure</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form> -->
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    let itemCount = 0; 
+    
+    function addOrderedItem() {
+      itemCount++; 
+      
+      const orderedItemsDiv = document.getElementById('orderedItems');
+      
+
+      const newItemDiv = document.createElement('div');
+      newItemDiv.classList.add('orderedItem');
+      
+      
+      newItemDiv.innerHTML = `
+        <div class="form-group">
+          <label for="dishName_${itemCount}">Dish Name:</label>
+          <select class="form-control" id="dishName_${itemCount}" name="orderedItems[${itemCount}][dishName]" required>
+            <option value="Select Dishes">Select Dishes</option>
+            <% dishes.forEach((dish) => { %>
+              <option value="<%= dish.dishName %>"><%= dish.dishName %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="quantity_${itemCount}">Quantity:</label>
+          <input type="number" class="form-control" id="quantity_${itemCount}" name="orderedItems[${itemCount}][quantity]" min="1" max="10" required>
+        </div>
+        <div class="form-group">
+          <label for="paymentMethod_${itemCount}">Payment Method:</label>
+          <select class="form-control" id="paymentMethod_${itemCount}" name="orderedItems[${itemCount}][paymentMethod]" required>
+            <option value="By Cash">By Cash</option>
+            <option value="By Card">By Card</option>
+            <option value="Gpay/upi">Gpay/upi</option>
+          </select>
+        </div>
+      `;
+      
+
+      orderedItemsDiv.appendChild(newItemDiv);
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const content = document.querySelector('.content');
+      const toggleBtn = document.querySelector('.toggle-btn');
+      
+      sidebar.classList.toggle('collapsed');
+      content.classList.toggle('collapsed');
+      toggleBtn.classList.toggle('collapsed');
+    }
+  </script>
+</body>
+</html>
+

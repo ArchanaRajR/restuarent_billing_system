@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <style>
+         body {
+          font-family: Arial, sans-serif;
+          background: linear-gradient(to right, #87599c, #41295a);
+          margin: 0;
+          padding: 0;
+        }
+    
+        .product-card {
+            margin-bottom: 20px;
+        }
+
+        .product-card .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(163, 137, 137, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .product-card .card-body {
+            padding: 1.25rem;
+        }
+
+        .product-card .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-card .card-text {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .product-card .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>MENU</h1>
+    <div class="container mt-5">
+        <div class="row">
+            <% products.forEach(product => { %>
+            <div class="col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="card">
+                        <img src="/images/sample-image.jpg" class="card-img-top" alt="Product Image">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= product.dishName %></h5>
+                            <p class="card-text">Price: $<%= product.price.toFixed(2) %></p>
+                            <p class="card-text">Category: <%= product.category.name %></p>
+                            <a href="/products/<%= product._id %>" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-VNCSsaofdBL+67HtqBmz1N3iXtPU4xFfw3Nz5Yw0JOpuh/tOFY1k+7Rc3l8xd85C"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh5D2V0pZBbX+DScJ/H6kPm6niKlk85/W9hB5"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: black;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #f2be6f;
+        }
+        .tables {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .tables a {
+            text-decoration: none;
+        }
+        .table {
+            width: calc(33.33% - 20px);
+            padding: 40px;
+            margin: 10px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .table:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .empty {
+            background-color: #48a032;
+        }
+        .occupied {
+            background-color: #d9534f;
+        }
+        .table h2, .table p {
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .table {
+                width: calc(50% - 20px);
+            }
+        }
+        @media (max-width: 480px) {
+            .table {
+                width: calc(100% - 20px);
+            }
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #1f1f1f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            transition: width 0.3s;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar.collapsed {
+            width: 80px;
+        }
+         .sidebar a {
+            color: #f2be6f;
+        }
+        .sidebar h3{
+            color: #f2be6f;
+            padding: 2px 10px 20px;
+            font-size: 1.75rem;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+            text-align: left;
+            box-sizing: border-box;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #f2be6f;
+            color: black;
+        }
+        .sidebar.collapsed a {
+            text-align: center;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+        .content.collapsed {
+            margin-left: 80px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 80px;
+            }
+            .content {
+                margin-left: 80px;
+            }
+        }
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            left: 260px;
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: left 0.3s;
+        }
+        .toggle-btn.collapsed {
+            left: 90px;
+        }
+        .order {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+        .order button {
+            background-color: #f2be6f;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .order button:hover {
+            background-color: #680a36;
+            color: white;
+        }
+        .create-button {
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #f2be6f;
+            color: black;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        .create-button:hover {
+            background-color: #680a36;
+            color: white;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: black;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            transition: background-color 0.3s;
+            background-color: rgb(235, 139, 31);
+            border-radius: 7px;
+        }
+        .navbar a:hover {
+            background-color: orange;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Waiter Dashboard</h3>
+        <a href="/waiter/menu">Menu</a>
+        <a href="/orders">Order Management</a>
+        <a href="/waiter" id="logout">Logout</a>
+    </div>
+    <!-- <button class="toggle-btn" onclick="toggleSidebar()">☰</button> -->
+    <div class="content">
+        <div class="container">
+            <h1>Table Management</h1>
+            <div class="tables">
+                <% tableFind.forEach((table) => { %>
+                    <% if(table.isOccupied) { %>
+                        <a href="/waiter/tableStatus/<%= table.id %>">
+                            <div class="table occupied">
+                                <h2>Table <%= table.tableNumber %></h2>
+                                <p>Occupied</p>
+                            </div>
+                        </a>
+                    <% } else { %>
+                        <a href="/waiter/tableStatus/<%= table.id %>">
+                            <div class="table empty">
+                                <h2>Table <%= table.tableNumber %></h2>
+                                <p>Vacant</p>
+                            </div>
+                        </a>
+                    <% } %>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <!-- <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const content = document.querySelector('.content');
+            const toggleBtn = document.querySelector('.toggle-btn');
+            
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+            toggleBtn.classList.toggle('collapsed');
+        }
+    </script> -->
+</body>
+</html>

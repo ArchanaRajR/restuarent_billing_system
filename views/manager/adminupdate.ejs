@@ -1,0 +1,246 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: black;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form.login {
+            background-color: #56505c;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: left;
+        }
+
+        .header {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .group.input__group {
+            margin-bottom: 15px;
+        }
+
+        .group.input__group label {
+            display: block;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .group.input__group input {
+            width: 275px;
+            padding: 10px;
+            font-size: medium;
+            color: #f2be6f;
+            border: solid 1px black;
+            border-radius: 13px;
+            background-color: #4e4c50;
+        }
+
+        .group.button__group {
+            text-align: center;
+        }
+
+        .group.button__group .login-btn {
+            background-color: #cc6a0d;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .group.button__group .login-btn img {
+            margin-left: 10px;
+        }
+
+        .group.button__group .login-btn:hover {
+            background-color: #af9231;
+        }
+
+    
+
+        .create-button:hover {
+            background-color: #e2931b;
+            color: white;
+            text-decoration: none;
+        }
+        .back-button{
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #df8f18;
+            color: #fff;
+            border-radius: 8px;
+           
+            
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="form login">
+       
+        <div class="header">Edit User</div>
+        <form action="/manager/update/<%= user._id %>" method="POST">
+            <div class="group input__group">
+                <label for="name">Username</label>
+                <input type="text" name="name" id="name" value="<%= user.name %>" required>
+            </div>
+            <div class="group input__group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="<%= user.email %>" required>
+            </div>
+            <div class="group input__group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" value="<%= user.password %>" required>
+            </div>
+            <div class="group button__group">
+                <button type="submit" class="login-btn">
+                    <span>Save Changes</span>
+                    <img src="https://i.cloudup.com/2ZAX3hVsBE-3000x3000.png" height="30" width="30" alt="Save Icon">
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: black;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form.login {
+            background: rgba(75, 73, 73, 0.5); /* Semi-transparent white background */
+            backdrop-filter: blur(10px); /* Blur effect */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px;
+            width: 300px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            color:#f2be6f;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .group.input__group {
+            margin-bottom: 15px;
+        }
+
+        .group.input__group label {
+            display: block;
+            color:#f2be6f;
+            margin-bottom: 5px;
+        }
+
+        .group.input__group input {
+            width: 285px;
+            padding: 10px;
+            font-size: medium;
+            color: white;
+            border: solid 1px black;
+            border-radius: 13px;
+            background-color: rgba(165, 152, 152, 0.1); /* Semi-transparent white background */
+            backdrop-filter: blur(10px); /* Blur effect */
+        }
+
+        .group.button__group {
+            text-align: center;
+        }
+
+        .group.button__group .login-btn {
+            background-color: #f2be6f; /* Match the back button color */
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .group.button__group .login-btn img {
+            margin-left: 10px;
+        }
+
+        .group.button__group .login-btn:hover {
+            background-color: #ee9613;
+        }
+
+        .create-button:hover {
+            background-color: #e2931b;
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-button {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #df8f18;
+            color: #fff;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form login">
+        <div class="header">Edit User</div>
+        <form action="/manager/update/<%= user._id %>" method="POST">
+            <div class="group input__group">
+                <label for="name">Username</label>
+                <input type="text" name="name" id="name" value="<%= user.name %>" required>
+            </div>
+            <div class="group input__group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="<%= user.email %>" required>
+            </div>
+            <div class="group input__group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" value="<%= user.password %>" required>
+            </div>
+            <div class="group button__group">
+                <button type="submit" class="login-btn">
+                    <span>Save Changes</span>
+                    <img src="https://i.cloudup.com/2ZAX3hVsBE-3000x3000.png" height="30" width="30" alt="Save Icon">
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

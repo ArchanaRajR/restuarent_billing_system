@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Category</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    
+    body {
+      background: black;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #f2be6f;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      color: #f2be6f;
+      border-radius: 0 0 10px 10px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    .container {
+      margin-top: 30px;
+      max-width: 600px;
+      background: rgb(58, 53, 53);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(153, 214, 171, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      font-weight: bold;
+      
+    }
+    
+    input[type="text"], input[type="number"], textarea, input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid orange;
+      color: gold;
+      border-radius: 10px;
+      background: transparent;
+    }
+    button {
+      background: #f2be6f;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: rgb(214, 139, 54);
+    }
+    ::placeholder {
+      color: #f2be6f; /* Placeholder color */
+    }
+    button {
+      background: #f2be6f; /* Button background */
+      color: black; /* Button text color */
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: rgb(214, 139, 54);
+    }
+    .btn-secondary {
+      background-color: #f2be6f !important; /* Back to Products button background */
+      color: black !important; /* Back to Products button text color */
+    }
+    .btn-secondary:hover{
+        background-color: #bd832d;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Add Category</h1>
+    <a href="/products" class="btn btn-secondary">Back to Products</a>
+</div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form action="/addCategory" method="post">
+                <div class="form-group">
+                    <label for="name" style="background: transparent;">Category Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter Category Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea style=  "border: 2px solid orange; background: transparent; color: #f2be6f;" id="description" name="description" class="form-control" placeholder="Enter Category Description" rows="4" required></textarea>
+                </div>
+                <button type="submit" style="background:#f2be6f ; color: black;" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

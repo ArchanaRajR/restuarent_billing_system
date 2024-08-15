@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #000;
+            color: #f2be6f;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #1f1f1f; /* Ash blackish shade */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+            text-align: left;
+            box-sizing: border-box;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #f2be6f;
+            color: black; /* Orange color on hover */
+            /* border-radius: 13px; */
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #000;
+        }
+
+        .header {
+            background-color: #545257;
+            color:#f2be6f ;
+            padding: 10px;
+            text-align: center;
+            margin: 0; /* Remove margin to eliminate gap */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative; /* Ensure relative positioning for absolute children */
+        }
+
+        .header h1 {
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px;
+            padding: 8px 16px;
+            background-color: #f2be6f; /* Orange color */
+            color: #1f1f1f; /* Dark text color */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #d6a254; /* Darker orange on hover */
+        }
+
+        .content-section {
+            background-color: #1a1a1a;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .content-section h2 {
+            color: #fff;
+        }
+
+        .sales-report {
+            min-height: 400px; /* Enlarged sales report section */
+            background-color:black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #f2be6f;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #000;
+            color: #555;
+        }
+        h2{
+            color: #f2be6f;
+        }
+    </style>
+</head>
+<body>
+    <style>
+        .salesreport-container {
+            width: 90%;
+            max-width: 1200px;
+            background-color: #000000;
+            padding: 20px;
+            margin: 0rem 0rem 0rem 3rem;
+            border-radius: 8px;
+        }
+        
+        .salesreport-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .salesreport-filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .salesreport-select, .salesreport-date, .salesreport-button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        
+        .salesreport-select, .salesreport-date {
+            background-color: #665e5e;
+            color: #fff;
+        }
+        
+        .salesreport-button {
+            background-color: #f2be6f;
+            color: black;
+            cursor: pointer;
+        }
+        
+        .salesreport-button:hover {
+            background-color: #f2be6f;
+        }
+        
+        .salesreport-summary {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .salesreport-summary-item {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 10px;
+            flex-grow: 1;
+            flex-basis: 180px;
+        }
+        
+        .salesreport-summary-value {
+            color: #00ff00;
+            font-size: 1.5em;
+        }
+        
+        .salesreport-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .salesreport-table th, .salesreport-table td {
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .salesreport-table th {
+            background-color: #333;
+        }
+        
+        .salesreport-table tbody tr:nth-child(odd) {
+            background-color: #2a2a2a;
+        }
+        
+        .salesreport-table tbody tr:nth-child(even) {
+            background-color: #1f1f1f;
+        }
+        
+        .salesreport-edit-button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #f90;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        .salesreport-edit-button:hover {
+            background-color: #e68000;
+        }</style>
+           <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <a href="/manager/managerDash">Managers</a>
+        <a href="/waiter/waiterDash">Waiters</a>
+        <!-- <a href="/report/day">Sales Report</a> -->
+    </div>
+    <div class="main-content">
+        <div class="header">
+            <h1>Dashboard
+               <a href="/manager"> <button class="logout-button">Logout</button></a>
+            </h1>
+        </div>
+        
+        <div id="sales-report" class="content-section">
+            <h2>Sales Report</h2>
+          
+                <div class="salesreport-container">
+                    <h1 class="salesreport-title">Sales Report</h1>
+                    
+                    <div class="salesreport-filters">
+                        <form action="/sales-report" method="get" class="form-inline">
+                            <select class="salesreport-select" id="range-select" name="range">
+                                <option value="range">Select range</option>
+                                <option value="daily" <%= range === 'daily' ? 'selected' : '' %>>Daily</option>
+                                <option value="weekly" <%= range === 'weekly' ? 'selected' : '' %>>Weekly</option>
+                                <option value="monthly" <%= range === 'monthly' ? 'selected' : '' %>>Monthly</option>
+                                <option value="yearly" <%= range === 'yearly' ? 'selected' : '' %>>Yearly</option>
+                            </select>
+                            <input type="date" class="salesreport-date" name="startDate" id="startDate" value="<%= startDate %>" class="form-control">
+                            <input type="date" class="salesreport-date" name="endDate" id="endDate"value="<%= endDate %>" class="form-control">
+                            <button class="salesreport-button" id="filter-button">Filter</button>
+                        </form>
+                        <a href="/sales-report/pdf?startDate=<%= startDate %>&endDate=<%= endDate %>&range=<%= range %>"  target="_blank">
+                            <button class="salesreport-button" id="pdf-button">Generate PDF</button>
+                        </a>
+                        
+                    </div>
+                    
+                    <div class="salesreport-summary">
+                        <div class="salesreport-summary-item">Total Sales<br><span class="salesreport-summary-value" id="total-sales">₹<%= totalSales %></span></div>
+                        <div class="salesreport-summary-item">Total Cancelled/Returned Orders<br><span class="salesreport-summary-value" id="total-cancelled"><%= totalCancelled %></span></div>
+                    </div>
+                    
+                    <table class="salesreport-table">
+                        <thead>
+                            <tr>
+                                <th>SL.no</th>
+                                <th>Dish</th>
+                                <th>Quantity</th>
+                                <th>Order Total</th>
+                                <th>Date of order</th>
+                                <th>Payment Method</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% orders.forEach((order, index) => { %>
+                               
+                                    <tr>
+                                        <td><%= index + 1 %></td>
+                                        <td>
+    
+                                        <% order.orderedItems.forEach(item => { %>
+                                        <%= item.dishName %>,<br> 
+                                        <% }) %>
+                                    </td>
+                                    <td>
+    
+                                        <% order.orderedItems.forEach(item => { %>
+                                        <%= item.quantity %><br> 
+                                        <% }) %>
+                                    </td>
+                                        <td><%= order.grandTotal %></td>
+                                        <td><%= order.orderDate.toISOString().substring(0, 10) %></td>
+                                        <td><%= order.orderedItems[0].paymentMethod %></td>
+                                    </tr>
+                                
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="footer">
+            <p>&copy; 2024 Your Company</p>
+        </div> -->
+    </div>
+</body>
+</html>
+

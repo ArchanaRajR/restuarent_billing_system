@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Orders</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom Styles */
+    .btn-orange {
+      background-color: #f2be6f;
+      border-color: orange;
+    }
+    .btn-orange:hover {
+      background-color: rgb(207, 137, 51);
+      border-color: darkorange;
+    }
+    .table {
+      background-color: transparent;
+    }
+    .table tbody tr:nth-child(even) {
+      background-color: #2c2c2c; /* Darker shade */
+    }
+    .table tbody tr:nth-child(odd) {
+      background-color: #1a1a1a; /* Lighter shade */
+    }
+    body {
+      background-color: black;
+      color: white;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .table th, .table td {
+      color: white;
+    }
+    /* Back Button */
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #f2be6f;
+      color: black;
+      padding: 5px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      text-decoration: none;
+
+
+    }
+    .back-button:hover{
+      text-decoration: none;
+      
+      color: black;
+    }
+    @media (max-width: 200px) { 
+      .back-button {
+        position: relative;
+        margin-bottom: 20px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <a href="/sales-report" class="back-button btn-orange">Back</a>
+    
+    <h1 class="mt-5" style="color: #f2be6f;">Order and Invoice Generate</h1>
+    <div class="table-responsive">
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Table No</th>
+            <th>Grand Total</th>
+            <th>Invoice (PDF)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% orders.forEach(order => { %>
+            <tr>
+              <td><%= order._id %></td>
+              <td><%= order.orderDate.toDateString() %></td>
+              <td><%= order.tableId.tableNumber %></td>
+              <td><%= order.grandTotal %></td>
+              <td><a href="/generate-invoice/<%= order._id %>/pdf" class="btn btn-orange">Download PDF</a></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
