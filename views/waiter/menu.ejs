@@ -317,27 +317,27 @@
             </ul>
         </nav>
     </header>
-
-    <!-- Menu Cards -->
-    <div class="menu-grid">
-        <% products.forEach(product => { %>
-        <div class="menu-card">
-            <div class="menu-card-img">
-                <img src="/images/<%= product.image[0] %>" alt="Product Image" />
+<!-- Menu Cards -->
+<div class="menu-grid">
+    <% products.forEach(product => { %>
+    <div class="menu-card">
+        <div class="menu-card-img">
+            <img src="/images/<%= product.image[0] %>" alt="Product Image" />
+        </div>
+        <!-- <a href="">  <button class="menu-card-btn"><i class="fas fa-shopping-cart"></i></button></a> -->
+        <div class="menu-card-body">
+            <div class="food-detail">
+                <h4><%= product.dishName %></h4>
+                <h5 style="color: green;"><%= product.category ? product.category.name : 'No Category' %></h5>
             </div>
-          <!-- <a href="">  <button class="menu-card-btn"><i class="fas fa-shopping-cart"></i></button></a> -->
-            <div class="menu-card-body">
-                <div class="food-detail">
-                    <h4><%= product.dishName %></h4>
-                    <h5 style="color: green;"><%= product.category.name %></h5>
-                </div>
-                <div class="food-price">
-                    <p>Price: &#8377;<%= product.price %></p>
-                </div>
+            <div class="food-price">
+                <p>Price: &#8377;<%= product.price %></p>
             </div>
         </div>
-        <% }); %>
     </div>
+    <% }); %>
+</div>
+
+   
 </body>
 </html>
-
